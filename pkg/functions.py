@@ -45,18 +45,18 @@ def town(character):
             print('--------------------')
             choice = input('What would you like to do? ')
             print('--------------------')
-            if choice == '1':
-                dungeon = choose_dungeon()
-                encounter(character, dungeon)
-                # del available_dungeons[dungeon]
-            elif choice == '2':
-                chat_townsfolk()
-            elif choice == '3':
-                drink_potion(character)
-            elif choice == '4':
-                character.character_screen()
-            else:
-                print('INVALID CHOICE. TRY AGAIN.')
+            match choice:
+                case '1':
+                    dungeon = choose_dungeon()
+                    encounter(character, dungeon)
+                case '2':
+                    chat_townsfolk()
+                case '3':
+                    drink_potion(character)
+                case '4':
+                    character.character_screen()
+                case _:
+                    print('INVALID CHOICE. TRY AGAIN.')
 
 
 def choose_class():
@@ -65,18 +65,18 @@ def choose_class():
         print('2 = Sorcerer')
         print('3 = Rogue')
         choice = int(input('Choose your class: '))
-
-        if choice == 1:
-            print('\nYou chose the Warrior\n')
-            return Warrior()
-        elif choice == 2:
-            print('\nYou chose the Sorcerer\n')
-            return Sorcerer()
-        elif choice == 3:
-            print('\nYou chose the Rogue\n')
-            return Rogue()
-        else:
-            print('Invalid choice. Try again. \n')
+        match choice:
+            case 1:
+                print('\nYou chose the Warrior\n')
+                return Warrior()
+            case 2:
+                print('\nYou chose the Sorcerer\n')
+                return Sorcerer()
+            case 3:
+                print('\nYou chose the Rogue\n')
+                return Rogue()
+            case _:
+                print('Invalid choice. Try again. \n')
 
 
 def chat_townsfolk():
@@ -162,19 +162,20 @@ def encounter(character, dungeon):
         print(f'3. Inspect your character')
         print(f'4. Return to town')
         choice = input('\nWhat would you like to do? ')
-        if choice == '2':
-            boss.boss_screen()
-        elif choice == '3':
-            character.character_screen()
-        elif choice == '4':
-            return ''
-        elif choice == '1':
-            print(f'\n**** You have engaged {boss.name}! ****\n')
-            print('--------------------')
-            battle(character, boss)
-            return ''
-        else:
-            print('Invalid choice!')
+        match choice:
+            case '2':
+                boss.boss_screen()
+            case '3':
+                character.character_screen()
+            case '4':
+                return ''
+            case '1':
+                print(f'\n**** You have engaged {boss.name}! ****\n')
+                print('--------------------')
+                battle(character, boss)
+                return ''
+            case _:
+                print('Invalid choice!')
 
 
 def battle(character, boss):
