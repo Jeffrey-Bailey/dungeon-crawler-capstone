@@ -25,6 +25,40 @@ def long_sleep():
     time.sleep(3.5)
 
 
+def town(character):
+    while True:
+        if character.hp <= 0:
+            print('You have died! Game over!')
+            print('---------------------- \n')
+            break
+        elif not available_dungeons:
+            print('Congratulations! You have defeated all the enemies and won the game!')
+            break
+        else:
+            print('\n--------------------')
+            print('You are in town')
+            print('--------------------')
+            print('1) Enter a dungeon')
+            print('2) Chat with townsfolk')
+            print('3) Drink Mystery Potion')
+            print('4) Inspect your character')
+            print('--------------------')
+            choice = input('What would you like to do? ')
+            print('--------------------')
+            if choice == '1':
+                dungeon = choose_dungeon()
+                encounter(character, dungeon)
+                # del available_dungeons[dungeon]
+            elif choice == '2':
+                chat_townsfolk()
+            elif choice == '3':
+                drink_potion(character)
+            elif choice == '4':
+                character.character_screen()
+            else:
+                print('INVALID CHOICE. TRY AGAIN.')
+
+
 def choose_class():
     while True:
         print('1 = Warrior')
@@ -127,18 +161,20 @@ def encounter(character, dungeon):
         print(f'2. Inspect {boss.name}')
         print(f'3. Inspect your character')
         print(f'4. Return to town')
-        choice = int(input('\nWhat would you like to do? '))
-        if choice == 2:
+        choice = input('\nWhat would you like to do? ')
+        if choice == '2':
             boss.boss_screen()
-        elif choice == 3:
+        elif choice == '3':
             character.character_screen()
-        elif choice == 4:
+        elif choice == '4':
             return ''
-        elif choice == 1:
+        elif choice == '1':
             print(f'\n**** You have engaged {boss.name}! ****\n')
             print('--------------------')
             battle(character, boss)
             return ''
+        else:
+            print('Invalid choice!')
 
 
 def battle(character, boss):
